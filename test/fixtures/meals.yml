@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  drop_id: 1
+  start: 2014-02-12 09:53:40
+  end: 2014-02-12 09:53:40
+  remark: MyText
+  spot_id: 1
+
+two:
+  drop_id: 1
+  start: 2014-02-12 09:53:40
+  end: 2014-02-12 09:53:40
+  remark: MyText
+  spot_id: 1

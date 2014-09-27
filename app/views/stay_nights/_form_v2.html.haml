@@ -1,0 +1,17 @@
+%h1
+  Stayed at Home?
+
+= simple_form_for(@stay_night, html: {class: "form-horizontal"}) do |f| 
+  
+  = f.input :today, label: "Which Day",  as: :string, input_html: { readonly: true, id: :datepicker_today }
+  = f.association :city, label: "Which City", collection: City.all(order: 'name'), include_blank: false
+  = f.association :hotel, label: "Stay at", prompt: "where did you stay?"
+  = f.input :rate, placeholder: "Total amount in RMB."
+  = f.input :comment, hint: "Any thing special."
+
+  .form-actions
+    = f.submit nil, class: "btn btn-primary"
+    = link_to "Cancel", stay_nights_path, class: "btn"
+
+%script{:type => "text/javascript",
+  :src  => "/assets/ui/datepicker_today.js"}        

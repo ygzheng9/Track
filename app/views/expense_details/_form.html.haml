@@ -1,0 +1,12 @@
+= simple_form_for(@expense_detail, remote: true, html: {class: "form-horizontal"}) do |f|
+  = f.input :today, as: :string,  input_html: { readonly: true }
+  = f.association :expense_type, :include_blank => false
+  = f.association :payment_type, :include_blank => false
+  = f.input :amount, hint: "Total expense in RMB. "
+  = f.input :comment, placeholder: "Any thing special."
+
+  .form-actions
+    = f.submit :go
+    = f.submit :cancel
+
+  %script{:type => "text/javascript", :src  => "/assets/ui/datepicker_today.js"}          

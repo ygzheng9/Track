@@ -1,0 +1,13 @@
+= simple_form_for(@working_location,  html: {class: "form-horizontal"}) do |f| 
+  = f.input :today, as: :string,  input_html: { readonly: true, id: :datepicker_today  }
+  = f.input :city_id, collection: @cities, :include_blank => false
+  = f.association :site, collection: @sites, :include_blank => false
+  = f.input :Taxi, hint: "Total expense in RMB. "
+  = f.input :comment, placeholder: "Any thing special."
+
+  .form-actions
+    = f.submit :Go, class: "btn"
+    = link_to 'cancel', working_locations_path, class: "btn btn-primary"
+
+%script{:type => "text/javascript", :src  => "/assets/ui/datepicker_today.js"}    
+%script{:type => "text/javascript", :src  => "/assets/working_locations.js"}        

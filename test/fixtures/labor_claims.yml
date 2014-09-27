@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  today: 2013-12-23
+  project_id: 1
+  hours: 1
+  comment: MyString
+
+two:
+  today: 2013-12-23
+  project_id: 1
+  hours: 1
+  comment: MyString

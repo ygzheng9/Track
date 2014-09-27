@@ -1,0 +1,8 @@
+= simple_form_for @stay_night do |f| 
+  = f.input :today, label: 'Date'
+  = f.association :city, :include_blank => false   
+  = f.association :hotel, :include_blank => false
+  = f.input :rate, hint: 'Total daily rate (room + tax) in RMB.'
+  = f.input :comment        
+  = f.submit "Go", { id: "night_go" } 
+  = f.submit "Cancel", {id: "night_cancel"}

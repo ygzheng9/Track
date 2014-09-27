@@ -1,0 +1,10 @@
+
+= submit_tag "Export", :name => "export_btn", :class => 'btn'
+
+= content_tag :a, "Copy", :href => "#modal", :class => 'btn', :data => {:toggle => 'modal'}
+= modal_dialog :id => "modal",
+         :header => { :show_close => true, :dismiss => 'modal', :title => 'Select target date' },
+         :body   => text_field_tag(:from_dtpker, params[:from_dtpker], {readonly: true})  + "-" + text_field_tag(:to_dtpker, params[:to_dtpker], {readonly: true}) ,
+         :footer => submit_tag("Copy", :name => 'copy_btn', :class => 'btn')
+
+= submit_tag "Delete", :name => "delete_btn", data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger'

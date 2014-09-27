@@ -1,0 +1,10 @@
+%tr{:id => "#{dom_id stay_night}"}
+  %td= check_box_tag "stay_night_ids[]", stay_night.id
+  %td= stay_night.today
+  %td= stay_night.city.name
+  %td= link_to stay_night.hotel.name, edit_stay_night_path(stay_night)
+  %td= stay_night.rate
+  %td= stay_night.comment
+  %td
+    = link_to 'Copy', stay_night_path(stay_night, opt: :copy), data: { confirm: 'Copy this?'}, class: "btn btn-mini"   
+    = link_to 'X', stay_night, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini btn-danger"

@@ -1,0 +1,21 @@
+= render "simple_search", list_path: stay_nights_path, new_path: new_stay_night_path
+
+= form_tag multi_ops_stay_nights_path do 
+  %table{id: "Night_List", class: "table table-striped"}
+    %thead
+      %tr
+        %th
+        %th Date
+        %th City
+        %th Hotel
+        %th Rate
+        %th Comment
+        %th Operations
+    %tbody
+      -stay_nights.each do |stay_night|
+        = render "stay_nights/hotel_night_v2", stay_night: stay_night
+
+  = render "set_tbl_header", list: stay_nights, src_file: "/assets/ui/list_to_table_night.js"
+  = submit_tag "Update", :name => "update_btn", :class => 'btn'
+  = render "multi_ops"
+  

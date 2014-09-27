@@ -1,0 +1,32 @@
+= render "simple_search", list_path: labor_claims_path, new_path: new_v2_labor_claims_path
+
+= form_tag multi_ops_labor_claims_path do 
+  %table{id: "Claim_List", class: "display table table-striped"}
+    %thead
+      %tr
+        %th 
+        %th Date
+        %th Project
+        %th Hours
+        %th Comment
+        %th Operation
+
+    %tbody
+      - labor_claims.each do |labor_claim|
+        = render 'labor_claims/claim_record', labor_claim: labor_claim    
+
+  = render "set_tbl_header", list: labor_claims, src_file: "/assets/ui/list_to_table_claim.js"
+  = submit_tag "Update", :name => "update_btn", :class => 'btn'
+  = render "multi_ops"
+  
+
+
+%br
+#Claim_Form_new{class: "btn"}
+  New
+
+#Claim_Form
+  = render 'labor_claims/form'
+
+%script{:type => "text/javascript", :src  => "/assets/labor_claims.js"}  
+

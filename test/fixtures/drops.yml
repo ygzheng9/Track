@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  today: 2014-01-24
+  getup_at: 2014-01-24 10:15:34
+  sleep_at: 2014-01-24 10:15:34
+  step: 1
+  km: 1.5
+  kcal: 1.5
+  pp: 1
+  xx: 1
+  comment: MyText
+
+two:
+  today: 2014-01-24
+  getup_at: 2014-01-24 10:15:34
+  sleep_at: 2014-01-24 10:15:34
+  step: 1
+  km: 1.5
+  kcal: 1.5
+  pp: 1
+  xx: 1
+  comment: MyText

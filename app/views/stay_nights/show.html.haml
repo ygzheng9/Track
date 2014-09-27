@@ -1,0 +1,26 @@
+%p{:id => "notice"}= notice
+
+%p
+  %strong Date:
+  = @stay_night.today
+
+%p
+  %strong City:
+  = @stay_night.city.name
+
+
+%p
+  %strong Hotel:
+  = @stay_night.hotel.name
+
+
+%p
+  %strong Rate:
+  = @stay_night.rate
+
+%p
+  %strong Comment:
+  = @stay_night.comment
+
+= link_to 'Edit', edit_stay_night_path(@stay_night) |
+= link_to 'Back', stay_nights_path

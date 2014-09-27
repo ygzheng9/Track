@@ -1,0 +1,24 @@
+// Place all the styles related to the GoSingle controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+/* navigate */
+#top_nav {
+  border: 2px sold #000000; 
+}
+
+#top_nav li {
+  float: left; 
+  list-style:none;  
+
+  color: #000000; 
+  text-decoration: none; 
+  padding-top: 4px; 
+  display: block; 
+  width: 92px; 
+  height: 22px; 
+  text-align: center;
+  background-color: #FFFFCC; 
+  margin-left: 2px;   
+}

@@ -1,0 +1,24 @@
+%h2
+  bundle copy
+
+= form_tag(go_bundle_copy_path)  do
+  = label_tag :Source
+  %hr
+  = label_tag "select four types"
+  %br
+  = label_tag "Source Date"
+  = text_field_tag :src_date_picker, nil, {readonly: true}
+
+  %br
+  %br
+  = label_tag :Tagert
+  %hr
+  = label_tag :From
+  = text_field_tag :fm_dtp, nil, {readonly: true}
+  = label_tag :To
+  = text_field_tag :to_dtp, nil, {readonly: true}
+  = submit_tag :copy
+
+%script{:type => "text/javascript",
+  :src  => "/assets/ui/bundle_dup.js"}       
+  

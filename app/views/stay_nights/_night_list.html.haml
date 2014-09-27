@@ -1,0 +1,23 @@
+%table{id: "Night_List", class: "table table-striped"}
+  %thead
+    %tr
+      %th Date
+      %th City
+      %th Hotel
+      %th Rate
+      %th Comment
+      %th Operations
+  %tbody
+    -stay_nights.each do |stay_night|
+      = render "stay_nights/hotel_night", stay_night: stay_night
+
+%br
+#Night_Form_new
+  New Input
+
+#Night_Form
+  = render 'stay_nights/form'
+
+
+%script{:type => "text/javascript",
+  :src  => "/assets/ui/list_to_table_night.js"} 

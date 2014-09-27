@@ -1,0 +1,566 @@
+== 12/23
+1. zeus start
+
+rails g scaffold Client name:string
+rails g scaffold Project client_id:integer name:string code:string
+rails g scaffold ExpenseType name:string
+rails g scaffold PaymentType name:string
+rails g scaffold City name:string 
+rails g scaffold Site city_id:string name:string
+rails g scaffold Hotel name:string
+
+zeus g scaffold ExpenseDetail today:date expense_type_id:integer payment_type_id:integer amount:integer comment:string
+
+zeus g scaffold LaborClaim today:date project_id:integer hours:integer comment:string
+
+zeus g scaffold WorkingLocation today:date city_id:integer site_id:integer Taxi:numeric comment:string
+
+zeus g scaffold StayNight today:date city_id:integer hotel_id:integer rate:numeric comment:string
+
+2. zeus rake db:migrate
+
+3. sample data
+
+4. city -> site: cascade changing, 
+  jQuery -> option remove, <option> appendTo <select>
+
+5. css layout
+    header, left, right, footer, middle  
+    middle can not be center horizontal??
+
+6. HAML
+    can not put text both in the same line as %h1 and indent below it
+
+7. Sass 
+    variant: $slim_width
+    @mixin slim_border
+    @include slim_border
+
+8. CoffeeScript
+     -> 
+    success: () -> 
+    $.each data, (idx, itm) -> 
+    restart server
+
+9. left menu
+    %ul
+        %li
+            Configuration
+            %ul
+                %li
+
+10. right GO
+        form_tag
+        date_select
+        submit_tag
+
+== 12/24
+11. zeus g controller GoSingle go
+        View: three parts: expense, code, location
+        Ajax to replace #main --> no need Ajax, it's on the sidebar, default to replace yield; 
+        Partials for: expense details,  pass "selected date"; 
+
+        todo: partials for: labor claim, location.  
+
+== 12/25
+12. in partial, enhence for SPA, utilizing Ajax. 
+        1. list + form
+                @list = all object  -> for list
+                @item = new object  -> for form -> set form to "new_object" 
+                assign id for each row to "#{dom_id @list_item}" -> list_item
+                form, table row: Ajax, remote: true
+        2. edit: 
+                replace form with selected @item    -> form: "new_object" -> "edit_object" 
+        3. update: 
+                replace table row with form updated @item                
+                render form for (@item = new object) -> form: "edit_object" -> "new_object" 
+        4. delete:
+                remove table row
+                render form for (@item = new object) -> set form to "new_object", no matter current status 
+        5. new: 
+                not necessary as the last step for update, delete, list is new
+        6. create:
+                append table row based on form inputted @item
+                reset the form -> the form is still "new_object", no change before and after create
+        7. cancel:
+                render form for (@item = new object), no matter current status
+
+13. labor claim
+        1. "- ruby code" must indent below
+        2. client side validate for hours empty check. 
+
+        2. Ajax create, how to pop up validates_xxx msg???
+
+14. stay night
+
+15. working location
+        1. form javascript
+
+== 12/27
+16. combine all tabs(claim, expense, hotel, site) into one page
+        1. partial template using relative path start from /app/view/
+
+17. main top menu and hide/show tabs
+        1. ul horizontal 
+        2. click to show/hide below part
+        3. default to show claim
+
+15. Form hide/show
+        1. default: hide
+        2. edit: show
+        3. update/create/delete: hide
+        4. create: show
+            1. add a link to table bottom; pure client-side event;
+            2. click the link, show the form and hide the link; 
+            3. hide form and show the link;
+
+16. right side bar is OK, default is hide, but left side, default not work
+        1. in the partial form, include the /assets/controller_name.js to reload the js (document.ready)
+        2. put new_link hide after render the form
+
+
+========20131228=========
+16. right sidebar render partial Ajax
+        1. Ajax request
+        2. in the partial form, include javascript to trigger document.load event; 
+
+========20131229=========
+17. using jQueryUI
+        1. gem 'jQuery-ui-rails'; 
+        2. add jquery-ui-all just behind jquery, and must before user defined js
+        3. reload zeus and restart rail server
+
+18. jQueryUI -> datepicker (calender control)
+        1. very straight forward: define div and $("#div").datepicker() in document.load
+        2. in rails, the string from date picker need parse to date format to pass to AC for datebase -- ugly 
+        3. js, set default to today,  -- the time also shown there -- ugly -- closed
+            a. date.toLocaleDateString to only show date, No time. 
+        4. in JS and action, make sure to use the same date format. 
+            a. set the input for datepicker readonly="true", to disable manual input.  -- beautiful
+            b. in action, format based on datepicker input. 
+        5. select date range -- beautiful    
+
+19. jQueryUI --> Tabs
+        1. very straight forward: define div and $("#div").tabs() in document.load
+
+20. jQuery --> dataTable
+        1. very straight forward: define table and $("#table").dataTable() in document.load
+        2. thead, tbody
+
+21. form partial template, seperate the js file to avoid re-initialization dataTable; 
+        1. move $("#tbl").dataTable to singel JS
+        2. put the include js in the xx_list.html.haml
+        3. also remove require_tree . from application.js ==> otherwise the dataTable would be initialized 2 times. 
+
+22. jQuery -> menu
+        1. quite straight forward, define ul and $("#ul").menu
+        2. if the total div is fix and the sub menu would pop up on the left  ==> ?? weired
+        3. can sub menu float over the parent div???
+
+22. dataTable can't contain the Ajax generated data.  
+        1. popup a windows. 
+        2. render the list totally based on the same search criteria, not Ajax.  
+
+23. put the right side calendar to the right-top; 
+        1. clear: right  => make the main to render on the new line
+        2. margin: 0 auto => make the right-top to occupy the whole width
+
+24. simple_form
+        1. can not generate <form> tag??
+
+==1/5==
+25. the same code, yield can not gererate <Form>??
+        1. form_tag, form_for must hava a do!!        
+
+26. simple form
+        1. gem 'simple_form'
+        2. bundle install
+        3. rails generate simple_form:install      
+
+27. date picker 
+        1. railscasts: #213
+
+
+==1/9==
+28. copy record
+        1. dup()
+        2. change today to target date
+        3. save()
+
+29. select a record, pop up a window and select a date, and copy to that date. 
+        1. how to pass param to window??  -- open
+
+        2. why not: 
+                src: date
+                target: fm_date, to_date
+
+30. "expense detail" to simple form 
+        1. today => datepicker
+        2. simple_form_for 
+        3. f.input :today, as: :string, input_html: { readonly: true } 
+
+==1/19===
+31. using gem "twitter-bootstrap-rails"
+    1. many helper in this gem 
+    2. menu really cool: nav_bar, menu_group, menu_item, menu_divider, drop_down
+
+    rails new store
+    rails g scaffold product name price:decimal --skip-stylesheets
+    rake db:migrate
+    rails g bootstrap:install
+    rails g bootstrap:themed expense_types -f    
+
+==1/21==
+
+32. sqlite 
+        alter PK Autoincrement
+        boolean: true f, not 1
+
+33. where: return relation
+    find: return objects
+
+34. link_to class: "btn"  ==> the same as button
+    expense_details_path: a string, not a simbole
+
+35. resources :projects do 
+        member do
+            get xxx             ==> passingl the id.  
+        end 
+
+        collection do           
+            get xxx             ==> xxx_projects_path
+        end
+    end     
+
+==1/22===
+36. ruby logic to include <%script%> or not
+
+37. Working location: failed valiation, but the form is weired ???
+
+38. modal dialog
+        1. :body => text_field_tag() + text_field_tag() + submit_tag()
+        2. put modal_dialog within the <form>, and confirm dialog means submit the form
+
+39. multiple submit button
+        1. if session[:btn_name] then else
+
+
+40. ActiveRecord.delete/find
+        1. taking id
+        2. also can taking ids[]
+
+41. flash[:notice]
+    render, redirect_to url, notice: "notice"
+
+42. params
+        parmas[:ids] ||= []
+        check_box_tag "ids[]", id
+        submit_tag :name => "ok_btn"  ==> params[:ok_btn]
+
+43. form -> params
+        1. form: =text_field_tag :from_date_picker, params[:from_date_picker] 
+        2. action: params[:from_date_picker]      
+
+===1/23====
+44. simple_form_for
+        1. can take a empty model and define a URL
+        2. empty model to generate the form and collect input 
+        3. strong params:
+                claim_params = params.require(:labor_claim).permit(:project_id, :hours, :comment)
+                new_val = claim_params.reject { |k,v| v.blank? }
+                claim.update_attributes(new_val)
+
+45. partial template
+        1. each HTML/erb piece can be a partial
+        2. each HTML/erb can be a param to the partial 
+            1. form action url
+            2. js file name
+            3. modal dialog html  
+        3. each script
+            1. = render "set_tbl_header", list: labor_claims, src_file: "/assets/ui/list_to_table_claim.js"
+
+46. can use ruby logic to laod js file or not to load js file. 
+
+47. improvememt
+        CSS
+        1. nav-bar 
+            1. menu
+            2. seperate
+            3. nav-form 
+            4. pull-right
+        2. table
+            1. table
+            2. table-bordered
+            3. table-striped
+            4. table-hover
+            5. table-condensed    
+        
+        View & Controller    
+        3. each form can have a URL to post
+            1. form_for @client, url: other_any_path do |f|
+        4. params[:client] 
+            1. simple_form_for @client
+            2. params[:client] is a hash, contains all client attributes. refer 44
+        5. datepicker
+            1. date format
+            2. sqlite date format: "yy-mm-dd"
+        6. simple_form_for 
+            0. form-horizontal
+            1. f.input association xx, as: string,             
+                    label: "Where to go", 
+                    collection: @list, 
+                    prompt: "please select one"   
+                    hints: "total cost"
+                    placeholder: "amount in RMB"
+        7. one form multiple submit
+            1. view: f.submit "update", name: "upate_btn"
+            1. action: if params[:update_btn] then ..
+        8. modal dialog
+        9. strong params, collection.reject
+            1. night_params = params.require(:stay_night).permit(:city_id, :hotel_id, :rate, :comment)
+            2. new_val = night_params.reject { |k,v| v.blank? }
+        10. flash[:notice]
+        11. console: rails c
+        12. check_box_tag "client_ids[]", client.id
+        13. routes.rb and path helper (multi_ops_labor_claims_path)
+                resources :expense_details do
+                    member do
+
+                    end
+                  
+                    collection do
+                      get 'new_v2'
+                      post 'multi_ops'
+                    end
+                  end            
+
+        ActiveRecord
+        13. find, delete, update ==> direct to db, no validation and callback
+        14. Relation vs. Array
+                1. where ==> return relation
+                2. find, all ==> return Array
+                3. relation: chain command, can call other db functions, i.e. sum.
+                4. Array: only has array functions, no db functions. 
+        15. id, also ids[]
+    
+        Env
+        1. rvm
+            1. apt source list
+            2. rvm install ruby 
+            3. rvm make default ruby
+            3. gem install rails
+            4. rvm make default ruby@rails
+        2. ruby.taobao.org
+            1. rvm 
+            2. gemfile
+        3. console: 
+            1. rails c     
+        4. clear console 
+            1. ctrl + L 
+            2. clear   
+        5. rails/info 
+
+48. Routing Error: uninitialized constant ProjectController
+    1. ProjectsController ==> s
+    2. match "/clients/:client_id/projects", :to => "projects#index_nested", via: :get, as: :client_projects         
+
+49. better nested 
+    1. client --> projects 
+    2. match "/clients/:client_id/projects", :to => "projects#index_nested", via: :get, as: :client_projects 
+        1. client 
+            index: client_projects_path(client)
+        2. projects
+            1. index_nested to set session[:client_id] 
+            2. index to clear session[:client_id] 
+            3. new, edit
+                @client = Client.find(session[:client_id]) unless session[:client_id].nil?
+                @project = @client.projects.new   -- not in edit 
+            3. calculate list_target_url based on session[:client_id]: 
+                projects_path if session[:client_id].nil?
+                or client_projects_path(client) 
+            4. change all previous projects_path to list_target_url
+
+50. I18n -> sites/index.html.haml
+    1. =t '.title', :default => model_class.model_name.human.pluralize.titleize    
+    2. en.yml 
+        en:        
+          sites:  --> s, controller 
+            index:  --> action view
+              title: "Location"
+
+51. nil
+    1. not nested if session[:client_id].nil?
+    2. nested unless session[:client_id].nil?
+    3. params[:project_ids] ||= []
+
+===1/24=====
+52. zeus g scaffold Weather Condition:string comment:text
+    zeus g scaffold Drop today:date getup_at:time sleep_at:time step:integer km:float kcal:float pp:integer xx:integer comment:text
+    zeus g scaffold Segment today:date is_valid:integer start:time end:time step:integer km:float kcal:float comment:text
+
+    rails g migration CreateJoinTableDropWeather drop Weather
+
+    rails g bootstrap:themed weathers -f   
+    rails g bootstrap:themed drops -f 
+    rails g bootstrap:themed segments -f    
+
+    rails generate migration AddDropToSegments drop_id:integer
+    rails generate migration RemoveTodayFromSegments today
+    rails generate migration AddAlarmToDrops is_alarm:integer
+ 
+===1/25=====
+53. find 
+        1. return nil if not found     
+    where 
+        1. return [] if not found, not nil 
+        2. where.first also not nil. 
+    find_by
+        1. return array or nil
+        2. find_by.first
+    destroy
+        1. only can cope one record
+    destroy_all
+        1. where(...).destroy_all
+
+54. save
+        1. go through validation. 
+        2. if failed, not saved to db, and no exception raised. return false. 
+    save!
+        1. if faild validation, raise exception. 
+    save!(:validate => false) 
+        1. skip the validation. 
+
+55. hash as params {}
+        1. inital_params = {is_valid:0, step:step, km: km, kcal: kcal}
+        2. new_align = segments.create_with(inital_params).find_or_create_by(is_valid: 0)      
+
+56. output format
+        1. strftime("%I:%M %P")  --> 02:30 AM 
+        2. round(1)  --> 4.2
+
+57. rails format helper ??        
+
+
+====1/31====
+58. start from morning, and tracking all events in the day.  -- OK
+
+59. has_and_belongs_to_many: weather_ids => []
+  1. View: = f.input :weather_ids, :collection => Weather.all, :label_method => :name, :value_method => :id, :as => :check_boxes, :item_wrapper_class => 'inline'
+
+  2. Controller: params.require(:drop).permit(:today, :getup_at, :sleep_at, :is_alarm, :step, :km, :kcal, :pp, :xx, :comment, :weather_ids => [])
+
+
+60. each meal eat what?    -- OK
+        token.
+        breakfast
+        lunch
+        supper
+        fruit
+
+====2/12====
+61. 
+    1. scaffold  
+        zeus g scaffold Dish name:string remark:text
+        zeus g scaffold Spot name:string remark:text
+        zeus g scaffold Colleague name:string remark:text
+        zeus g scaffold Meal drop_id:integer start:time end:time remark:text spot_id:integer
+        zeus g scaffold MealDish meal_id:integer dish_id:integer amount:float quantity:float
+
+    2. rake db:migrate
+
+    3. apply bootstrap 
+        zeus g bootstrap:themed dishes -f
+        zeus g bootstrap:themed spots -f
+        zeus g bootstrap:themed colleagues -f
+        zeus g bootstrap:themed meals -f
+        zeus g bootstrap:themed meal_dishes -f
+
+    4. simplify scaffold     
+        remove unnecessary columns from index.html: id, create_date
+        remove show action from controller: new/update redirect_to dishes_url 
+
+    5. add menu in application
+
+    6. link meal beneath drop. 
+        a. match "/drops/:drop_id/meals", :to => "meals#index_nested", via: :get, as: :drop_meals
+        b. save params[:drop_id] to session[:drop_id]
+        c. new, create: drop.meals.new(params)
+        d. create, update, delete: redirect_to drops_url
+
+    7. dependent delete
+        a. has_many :segments, dependent: :destroy
+        b. has_many :meals, dependent: :destroy 
+
+    8. link MealDish to meal
+        a. match
+        b. index, index_nested:
+            if both params[:meal_id] and session[:meal_id] are nill, redirect_to meals_url
+            else if params[:meal_id] is not nill
+                save params[:meal_id] to session[:meal_id]
+
+        c. new, create: meal.meal_dishes.new(params)
+        d. create, update, delete: redirect_to meal_dishes_url
+
+    9. add remark to meal_dish
+        a. rails generate migration AddRemarkToMealDish remark:text    
+        b. rake db:migrate
+
+    10. add amount, is_paid to meal
+        a. rails generate migration AddAmountToMeal amount:float is_paid:integer
+        b. rake db:migrate
+        c. params.require(:meal).permit(..., :amount, :is_paid)
+
+    11. add whom to meal
+        a. zeus g migration AddKeyPersonToMeal key_person_id:integer
+        b. zeus g migration AddAdditionalPersonToMeal additional_person_id:integer
+
+    12. colleague paly multiply roles in meal
+        a. define different roles
+            belongs_to :key_person, class_name: :Colleague
+            belongs_to :additional_person, class_name: :Colleague
+        b. association_name, class_name, xxx_key 
+            foreign_key: based on association_name(key_person), not Colleague; default is association_name_id
+            primary_key: based on class_name(Colleague), not key_person; default is id
+        c. use association_name, not class_name
+            <%= f.association :key_person, label: "Together with", prompt: "with whom?"%>
+            <%= f.association :additional_person, label: "Any other", prompt: "with whom?"%>
+            
+62. segments order not by start
+    a. in db, there are date + time
+    b. default date is: 2000/01/01
+    c. however, some are: 2013/02/11, so the order is mess
+
+=============
+52. Bootstrap:
+      1. datepicker
+      2. timepicker
+
+24. partial template to render other actions and passing parameter??        
+
+18. AngularJS
+
+16. cell 
+
+12. sidebar date can not changed when click Go??
+        1. yes, everytime it re-loaded. 
+        2. move calendar into a cell, 
+        3. every time get date from session to load the calendar
+        4. when click Go, put selected date into the session 
+
+15. rails Ajax, exception(i.e. db can not access) handle??
+
+12. highlight current selected line??
+
+16. chart
+
+=============
+13. copy last day.  -- Done
+14. Fundation  -- Bootstrap instead
+15. how to using session to pass data between controller, to keep the state?  -- Done
+    1. global variant todo this? session global, not total golbal
+16. format the page.  -- Done
+        1. input table --> input field;
+        2. list to table; 
+22. jQuery -> form ()        -- done
+23. in the new/update/delete Ajax, render the whole list, not update the DOM.  -- Done
+        1. Ajax is to re-render the minimn part of page, not load the whole page by the trick and  pretend not reloading.

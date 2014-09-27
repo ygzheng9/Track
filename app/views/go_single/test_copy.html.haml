@@ -1,0 +1,21 @@
+%table{id: "Claim_List", class: "display"}
+  %thead
+    %tr
+      %th Date
+      %th Project
+      %th Hours
+      %th Comment
+      %th
+      %th  
+      %th
+
+  %tbody
+    - @labor_claims.each do |labor_claim|
+      %tr{:id => "#{dom_id labor_claim}"}
+        %td= labor_claim.today 
+        %td= link_to labor_claim.project.full_name, edit_labor_claim_path(labor_claim)
+        %td= labor_claim.hours 
+        %td= labor_claim.comment 
+        %td= link_to 'Copy', labor_claim_path(labor_claim, opt: :copy), data: { confirm: 'Copy this?'}
+        %td= button_to 'cp', labor_claim_path(labor_claim, opt: :copy), method: :get, data: { confirm: 'Copy this?'}
+        %td= link_to 'X', labor_claim, method: :delete, data: { confirm: 'Are you sure?' }

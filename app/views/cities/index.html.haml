@@ -1,0 +1,20 @@
+.page-header
+  %h1 City
+
+%table{class: "table table-hover table-bordered"}
+  %thead
+    %tr 
+      %th Name
+      %th Operations
+
+  %tbody
+    - @cities.each do |city|
+      %tr
+        %td
+          = link_to city.name, edit_city_path(city)         
+        %td          
+          = link_to 'Sites', city_sites_path(city), :class => 'btn btn-mini '
+          = link_to 'X', city, method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger'
+%br
+
+= link_to 'New City', new_city_path, :class => 'btn btn-primary'

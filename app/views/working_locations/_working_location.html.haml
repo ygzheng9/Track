@@ -1,0 +1,10 @@
+%tr{id: "#{dom_id working_location}"}
+  %td= check_box_tag "location_ids[]", working_location.id
+  %td= working_location.today 
+  %td= working_location.site.city.name 
+  %td= link_to working_location.site.name, edit_working_location_path(working_location), remote: true
+  %td= working_location.Taxi 
+  %td= working_location.comment 
+  %td
+    = link_to 'Copy', working_location_path(working_location, opt: :copy), data: { confirm: 'Copy this?'}, class: "btn btn-mini"    
+    = link_to 'X', working_location, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-mini btn-danger"

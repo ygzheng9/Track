@@ -1,0 +1,11 @@
+= simple_form_for(@labor_claim,remote: true, :html => {class: "form-horizontal"}) do |f| 
+  = f.input :today, label: :Date, as: :string,  input_html: { readonly: true, id: :datepicker_today  }
+  = f.association :project, collection: Project.get_all_available, label_method: :full_name, :include_blank => false
+  = f.input :hours, collection: 1..8, hint: "How long worked for it? ", include_blank: false
+  = f.input :comment, placeholder: "Any thing special."
+  .form-actions
+    = f.submit 'Go', {id: "Claim_Go"}
+    = f.submit 'Cancel', {id: "Claim_Cancel"}
+
+      
+%script{:type => "text/javascript", :src => "/assets/ui/datepicker_today.js"}        

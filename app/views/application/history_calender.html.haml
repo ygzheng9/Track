@@ -1,0 +1,10 @@
+= form_tag(go_single_go_path, {remote: true, method: :get} )
+#calender 
+  = label_tag :From
+  = text_field_tag :from_date_picker, nil, {readonly: true}
+  = label_tag :To
+  = text_field_tag :to_date_picker, nil, {readonly: true}
+  = submit_tag :Go, {id: :go_single_day}
+
+%script{:type => "text/javascript",
+  :src  => "/assets/ui/date_picker.js"}          

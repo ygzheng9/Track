@@ -1,0 +1,35 @@
+<%- model_class = Spot -%>
+<div class="page-header">
+  <h1>
+    <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %>
+    <%= link_to t('.new', :default => t("helpers.links.new")),
+            new_spot_path,
+            :class => 'btn btn-primary btn-mini' %>
+  </h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:remark) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @spots.each do |spot| %>
+      <tr>
+        <td><%= link_to spot.name, edit_spot_path(spot) %></td>
+        <td><%= spot.remark %></td>
+        <td>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      spot_path(spot),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

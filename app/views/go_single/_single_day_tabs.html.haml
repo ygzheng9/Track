@@ -1,0 +1,30 @@
+%div{id: "from_to_list_tabs"}
+  %ul
+    %li
+      %a{ href: "#Claim" } 
+        Claim
+    %li
+      %a{ href: "#Expense" } 
+        Expense 
+    %li
+      %a{ href: "#Location" } 
+        Location  
+    %li
+      %a{ href: "#Hotel" } 
+        Hotel  
+
+  %div{id: "Claim", class: "subTabs"}
+    = render "labor_claims/claim_list", labor_claims: labor_claims
+
+  %div{id: "Expense", class: "subTabs"}
+    = render "expense_details/expense_list", expense_details: expense_details
+
+
+  %div{id: "Location", class: "subTabs"}
+    = render "working_locations/working_location_list", working_locations: working_locations
+
+  %div{id: "Hotel", class: "subTabs"}
+    = render "stay_nights/night_list", stay_nights: stay_nights
+      
+
+%script{:type => "text/javascript", :src  => "/assets/ui/from_to_list.js"}     

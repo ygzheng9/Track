@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Today:</strong>
+  <%= @expense_detail.today %>
+</p>
+
+<p>
+  <strong>Expense type:</strong>
+  <%= @expense_detail.expense_type.name %>
+</p>
+
+<p>
+  <strong>Payment type:</strong>
+  <%= @expense_detail.payment_type.name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @expense_detail.amount %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @expense_detail.comment %>
+</p>
+
+<%= link_to 'Edit', edit_expense_detail_path(@expense_detail) %> |
+<%= link_to 'Back', expense_details_path %>

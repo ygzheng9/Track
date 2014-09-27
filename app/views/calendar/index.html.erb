@@ -1,0 +1,26 @@
+<h1>Calendar#index</h1>
+<p>Find me in app/views/calendar/index.html.erb</p>
+
+<h2 id="month">
+  <%= link_to "<", date: @date.prev_month %>
+  <%= @date.strftime("%B %Y") %>
+  <%= link_to ">", date: @date.next_month %>
+</h2>
+
+
+<div id="articles">
+  <%= calendar_cx @date do |date| %>
+    <%= date.day %>
+
+    <% if @expenses_by_date[date] %>
+    <ul>
+      <% @expenses_by_date[date].each do |expense| %>
+        <li><%= expense.expense_type.name + " --- " + expense.amount.to_s %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+  <% end %>
+</div>
+
+<p>finished rendering calender.</p>

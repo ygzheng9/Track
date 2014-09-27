@@ -1,0 +1,23 @@
+%ul{id: "top_nav"}
+  %li{id: "claim"}
+    Claim
+  %li{id: "expense"} 
+    Expense
+  %li{id: "location"}
+    Location
+  %li{id: "hotel"} 
+    Hotel
+
+%div{id: "expense", class: "subTabs"}
+  = render "expense_details/expense_list", expense_details: expense_details
+
+%div{id: "claim", class: "subTabs"}
+  = render "labor_claims/claim_list", labor_claims: labor_claims
+
+%div{id: "location", class: "subTabs"}
+  = render "working_locations/working_location_list", working_locations: working_locations
+
+%div{id: "hotel", class: "subTabs"}
+  = render "stay_nights/night_list", stay_nights: stay_nights
+    
+%script{:type => "text/javascript", :src  => "/assets/go_single.js"}     

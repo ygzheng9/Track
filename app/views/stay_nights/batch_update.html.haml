@@ -1,0 +1,34 @@
+%h3
+  Where did you stay indeed?
+
+= simple_form_for(@stay_night,  url: batch_update_stay_nights_path, :html => {class: "form-horizontal"}) do |f|
+  %table{class: "table table-hover table-condensed table-bordered"}
+    %thead
+      %tr
+        %th Date
+        %th City
+        %th Hotel
+        %th Rate
+        %th Comment
+    %tbody
+      - @stay_nights.each do |night|
+        %tr
+          %td
+            = hidden_field_tag "stay_night_ids[]", night.id
+            = night.today 
+          %td= night.city.name
+          %td= night.hotel.name
+          %th= night.rate
+          %td= night.comment
+  
+  %h3
+    New stay info
+  
+  = f.association :city, label: "Which City", collection: City.all(order: 'name'), prompt: "same city?"
+  = f.association :hotel, label: "Stay at", prompt: "same hotel?"
+  = f.input :rate, placeholder: "Total amount in RMB."
+  = f.input :comment, hint: "Any thing special."
+
+  .form-actions
+    = f.submit "Update", class: "btn btn-primary"
+    = link_to "Cancel", stay_nights_path, class: "btn"    

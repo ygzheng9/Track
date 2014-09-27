@@ -1,0 +1,62 @@
+
+!!! 5
+%html
+  %head
+    %meta{charset: "utf-8"}
+    %meta{'http-equiv' => "X-UA-Compatible", content: "IE=Edge,chrome=1"}
+    %meta{:name => "viewport", :content => {:width => 'device-width', :initial => 'scale=1.0'}}
+    %title= content_for?(:title) ? yield(:title) : "Tracks"
+    = csrf_meta_tags 
+    
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+
+  %body
+
+    = nav_bar :fixed => :top, :brand => "Tracking", :responsive => true do 
+      = menu_group do
+        = menu_item "Home", root_path 
+        = menu_divider 
+        = drop_down "Daily" do 
+          = menu_item "Workout", drops_path  
+          = menu_item "Labor Claim", labor_claims_path  
+          = menu_item "Stay Hotel", stay_nights_path
+          = menu_item "Working Location", working_locations_path
+          = menu_item "Out of Pocket", expense_details_path                
+        = drop_down "Life" do 
+          = menu_item "Weather", weathers_path  
+          = menu_item "Dish", dishes_path  
+          = menu_item "Spot", spots_path  
+          = menu_item "Colleague", colleagues_path  
+        = drop_down "Work" do 
+          = menu_item "Client", clients_path
+          = menu_item "Project", projects_path
+          = menu_item "City", cities_path
+          = menu_item "Hotel", hotels_path                              
+          = menu_item "Expense Type", expense_types_path
+          = menu_item "Payment Type", payment_types_path
+        = menu_divider 
+        = menu_item "About Us", "#" 
+        = menu_item "Contact", "#" 
+
+    %div{class: "container"}
+      %div{class: "row"}
+
+        %div{class: "span2"}
+          %div{class: "well sidebar-nav"}
+            %h3 Operations
+            %ul{class: "nav nav-list"}
+              %li{class: "nav-header"} 
+                Daily
+              %li= link_to "Workout", drops_path 
+              %li= link_to "Labor Claim", labor_claims_path  
+              %li= link_to "Stay Hotel", stay_nights_path
+              %li= link_to "Working Location", working_locations_path
+              %li= link_to "Out of Pocket", expense_details_path
+        %div{class: "span10"}
+          = bootstrap_flash
+          = yield
+
+      %footer
+        %p
+          &copy; YG 2014

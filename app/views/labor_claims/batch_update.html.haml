@@ -1,0 +1,29 @@
+%h3
+  Claim wrong code again?
+
+= simple_form_for(@claim,  url: batch_update_labor_claims_path, :html => {class: "form-horizontal"}) do |f|
+  %table{class: "table table-hover table-condensed table-bordered"}
+    %thead
+      %tr
+        %th Date
+        %th Project
+        %th Hours
+        %th Comment
+    %tbody
+      - @claims.each do |claim|
+        %tr
+          %td
+            = hidden_field_tag "claim_ids[]", claim.id
+            = claim.today 
+          %td= claim.project.full_name
+          %td= claim.hours
+          %td= claim.comment
+  %h3
+    New code
+  = f.association :project, collection: Project.get_all_available, label_method: :full_name, prompt: "same project? "
+  = f.input :hours, collection: 1..8, hint: "How long worked for it? ", prompt: "same hours? "
+  = f.input :comment, placeholder: "Any thing special."
+
+  .form-actions
+    = f.submit 'Update', class: "btn btn-primary"
+    = link_to 'Cancel', labor_claims_path, class: "btn"

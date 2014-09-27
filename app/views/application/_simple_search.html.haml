@@ -1,0 +1,11 @@
+= nav_bar :responsive => true do
+  = form_tag(list_path, method: :get, :class => 'navbar-form pull-left') do
+    = text_field_tag :from_date_picker, params[:from_date_picker], {readonly: true}
+    \-
+    = text_field_tag :to_date_picker, params[:to_date_picker], {readonly: true}
+    = submit_tag :Go, class: "btn"
+
+  = form_tag(new_path, method: :get, :class => 'navbar-form pull-right') do
+    = submit_tag :New, class: "btn"
+
+  %script{:type => "text/javascript", :src  => "/assets/ui/datepicker_fm_to.js"}  

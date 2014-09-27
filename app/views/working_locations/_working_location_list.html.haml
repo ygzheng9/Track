@@ -1,0 +1,27 @@
+= render "simple_search", list_path: working_locations_path, new_path: new_v2_working_locations_path
+
+= form_tag multi_ops_working_locations_path do 
+  %table{id: "Location_List", class: "table table-striped"}
+    %thead
+      %tr
+        %th
+        %th Date
+        %th City
+        %th Site
+        %th Taxi
+        %th Comment
+        %th Operations
+
+    %tbody
+      - working_locations.each do |working_location|
+        = render "working_locations/working_location", working_location: working_location
+
+  = render "set_tbl_header", list: working_locations, src_file: "/assets/ui/list_to_table_location.js"
+  = render "multi_ops"
+
+%br
+#Location_Form_new{class: "btn"}
+  New Input
+
+#Location_Form
+  = render "working_locations/form"

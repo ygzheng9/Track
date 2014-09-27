@@ -1,0 +1,9 @@
+%tr{:id => "#{dom_id labor_claim}"}
+  %td= check_box_tag "claim_ids[]", labor_claim.id
+  %td= labor_claim.today 
+  %td= link_to labor_claim.project.full_name, edit_labor_claim_path(labor_claim), remote: true 
+  %td= labor_claim.hours 
+  %td= labor_claim.comment 
+  %td
+    = link_to 'Copy', labor_claim_path(labor_claim, opt: :copy), data: { confirm: 'Copy this?'}, class: "btn btn-mini"  
+    = link_to 'X', labor_claim, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-mini btn-danger"

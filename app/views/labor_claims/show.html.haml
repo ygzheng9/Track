@@ -1,0 +1,25 @@
+%p.notice
+  = notice
+
+%p
+  %strong 
+    Date:
+    = @labor_claim.today
+
+%p
+  %strong 
+    Project:
+    = @labor_claim.project.full_name
+
+%p
+  %strong
+    Hours:
+    = @labor_claim.hours
+
+%p
+  %strong
+    Comment:
+    = @labor_claim.comment
+
+= link_to 'Edit', edit_labor_claim_path(@labor_claim) |
+= link_to 'Back', labor_claims_path

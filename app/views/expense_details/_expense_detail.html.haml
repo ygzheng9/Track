@@ -1,0 +1,10 @@
+%tr{:id => "#{dom_id expense_detail}"}
+  %td= check_box_tag "expense_ids[]", expense_detail.id
+  %td= expense_detail.today
+  %td= expense_detail.expense_type.name 
+  %td= expense_detail.payment_type.name 
+  %td= link_to expense_detail.amount, edit_expense_detail_path(expense_detail), remote: true
+  %td= expense_detail.comment 
+  %td
+    = link_to 'Copy', expense_detail_path(expense_detail, opt: :copy), data: { confirm: 'Copy this?'}, class: "btn btn-mini"
+    = link_to 'X', expense_detail, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, class: "btn btn-danger btn-mini"

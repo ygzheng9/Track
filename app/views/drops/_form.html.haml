@@ -1,0 +1,21 @@
+= simple_form_for @drop, :html => { :class => 'form-horizontal' } do |f| 
+  = f.input :today, as: :string,  input_html: { readonly: true, id: :datepicker_today  }
+  = f.input :getup_at, label: "Woke up" 
+  = f.input :sleep_at, label: "Slept"
+  = f.input :is_alarm, collection: [["Yes", 1], ["No", 0]], include_blank: false, label: "Woke up by alarm"
+  = f.input :step, placeholder: "11000"
+  = f.input :km, placeholder: "8.4"
+  = f.input :kcal, placeholder: "415"
+  = f.input :pp, label: "PP" , collection: 1..5, include_blank: false 
+  = f.input :xx, collection: [["No", 0], ["Yes", 1]], include_blank: false, label: "XX"
+  = f.input :comment 
+  = f.input :weather_ids, :collection => Weather.all, :label_method => :name, :value_method => :id, :as => :check_boxes, :item_wrapper_class => 'inline'
+
+  .form-actions
+    = f.button :submit, :class => 'btn-primary' 
+    = link_to t('.cancel', :default => t("helpers.links.cancel")),
+                drops_path, :class => 'btn' 
+
+
+%script{:type => "text/javascript",
+  :src  => "/assets/ui/datepicker_today.js"}    

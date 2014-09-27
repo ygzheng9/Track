@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Today:</strong>
+  <%= @working_location.today %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @working_location.site.city.name %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @working_location.site.name %>
+</p>
+
+<p>
+  <strong>Taxi:</strong>
+  <%= @working_location.Taxi %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @working_location.comment %>
+</p>
+
+<%= link_to 'Edit', edit_working_location_path(@working_location) %> |
+<%= link_to 'Back', working_locations_path %>
